@@ -18,6 +18,14 @@ export default function App() {
   const [showModal, setShowModal] = useState(false);
   const [editingIncome, setEditingIncome] = useState(false);
   const [incomeVal, setIncomeVal] = useState("");
+  const [isDark, setIsDark] = useState(() => localStorage.getItem("finsnap_theme") !== "light");
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = isDark ? "dark" : "light";
+    localStorage.setItem("finsnap_theme", isDark ? "dark" : "light");
+  }, [isDark]);
+
+  const toggleTheme = () => setIsDark((d) => !d);
 
   useEffect(() => {
     setData(load(yr, mo));
@@ -57,7 +65,7 @@ export default function App() {
   const defaultDate = `${yr}-${pad(mo + 1)}-${pad(Math.min(now.getDate(), 28))}`;
 
   return (
-    <div style={{ background: "#080808", minHeight: "100vh", color: "#fff" }}>
+    <div style={{ background: "var(--bg)", minHeight: "100vh", color: "var(--text)" }}>
       <Header
         mo={mo}
         yr={yr}
@@ -68,6 +76,8 @@ export default function App() {
         setEditingIncome={setEditingIncome}
         commitIncome={commitIncome}
         navMonth={navMonth}
+        isDark={isDark}
+        toggleTheme={toggleTheme}
       />
 
       <SavingsBanner savings={savings} totalSpent={totalSpent} income={data.income} />
@@ -82,7 +92,7 @@ export default function App() {
       }}>
         {/* Left — Budget Cards */}
         <div>
-          <div style={{ color: "#383838", fontSize: 9, fontFamily: "'DM Mono',monospace", letterSpacing: 3, marginBottom: 14 }}>
+          <div style={{ color: "var(--text-label)", fontSize: 9, fontFamily: "'DM Mono',monospace", letterSpacing: 3, marginBottom: 14 }}>
             BUDGET TRACKING · click amount to edit
           </div>
           {CATS.map((cat) => (
@@ -99,8 +109,8 @@ export default function App() {
         {/* Right — Chart + Transactions */}
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           {/* Donut chart card */}
-          <div style={{ background: "#111", border: "1px solid #1e1e1e", borderRadius: 14, padding: "20px 18px" }}>
-            <div style={{ color: "#383838", fontSize: 9, fontFamily: "'DM Mono',monospace", letterSpacing: 3, marginBottom: 16 }}>SPENDING BREAKDOWN</div>
+          <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 14, padding: "20px 18px" }}>
+            <div style={{ color: "var(--text-label)", fontSize: 9, fontFamily: "'DM Mono',monospace", letterSpacing: 3, marginBottom: 16 }}>SPENDING BREAKDOWN</div>
             <DonutChart catTotals={catTotals} totalSpent={totalSpent} />
             {/* Legend */}
             <div style={{ marginTop: 18 }}>
@@ -110,11 +120,11 @@ export default function App() {
                   <div key={cat.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
                       <div style={{ width: 8, height: 8, borderRadius: 2, background: cat.color, flexShrink: 0 }} />
-                      <span style={{ color: "#777", fontSize: 11, fontFamily: "'Archivo',sans-serif" }}>{cat.label}</span>
+                      <span style={{ color: "var(--text-mid)", fontSize: 11, fontFamily: "'Archivo',sans-serif" }}>{cat.label}</span>
                     </div>
                     <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                      {pct > 0 && <span style={{ color: "#333", fontFamily: "'DM Mono',monospace", fontSize: 10 }}>{pct}%</span>}
-                      <span style={{ color: catTotals[cat.id] > 0 ? "#ccc" : "#2a2a2a", fontFamily: "'DM Mono',monospace", fontSize: 11 }}>
+                      {pct > 0 && <span style={{ color: "var(--text-dimmer)", fontFamily: "'DM Mono',monospace", fontSize: 10 }}>{pct}%</span>}
+                      <span style={{ color: catTotals[cat.id] > 0 ? "var(--text-secondary)" : "var(--text-faint)", fontFamily: "'DM Mono',monospace", fontSize: 11 }}>
                         {catTotals[cat.id] > 0 ? $c(catTotals[cat.id]) : "—"}
                       </span>
                     </div>
@@ -125,14 +135,14 @@ export default function App() {
           </div>
 
           {/* Recent transactions */}
-          <div style={{ background: "#111", border: "1px solid #1e1e1e", borderRadius: 14, padding: "20px 18px" }}>
+          <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 14, padding: "20px 18px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-              <div style={{ color: "#383838", fontSize: 9, fontFamily: "'DM Mono',monospace", letterSpacing: 3 }}>TRANSACTIONS</div>
-              <div style={{ color: "#333", fontFamily: "'DM Mono',monospace", fontSize: 10 }}>{data.transactions.length} total</div>
+              <div style={{ color: "var(--text-label)", fontSize: 9, fontFamily: "'DM Mono',monospace", letterSpacing: 3 }}>TRANSACTIONS</div>
+              <div style={{ color: "var(--text-dimmer)", fontFamily: "'DM Mono',monospace", fontSize: 10 }}>{data.transactions.length} total</div>
             </div>
 
             {recentTxns.length === 0 ? (
-              <div style={{ textAlign: "center", padding: "32px 0", color: "#2a2a2a", fontFamily: "'DM Mono',monospace", fontSize: 11 }}>
+              <div style={{ textAlign: "center", padding: "32px 0", color: "var(--text-faint)", fontFamily: "'DM Mono',monospace", fontSize: 11 }}>
                 no transactions yet<br />
                 <span style={{ fontSize: 22, display: "block", marginTop: 8 }}>💸</span>
               </div>

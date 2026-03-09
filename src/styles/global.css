@@ -4,8 +4,64 @@
   padding: 0;
 }
 
+/* ── Theme Variables ────────────────────────────────── */
+
+:root {
+  --bg: #080808;
+  --bg-card: #111;
+  --bg-input: #161616;
+  --bg-modal: #0e0e0e;
+  --bg-hover: #222;
+  --bg-savings-good: #0a1a11;
+  --bg-savings-bad: #1a0a0a;
+  --bg-bar: #1e1e1e;
+  --border: #1e1e1e;
+  --border-light: #161616;
+  --border-input: #242424;
+  --border-hover: #222;
+  --text: #fff;
+  --text-secondary: #bbb;
+  --text-body: #d0d0d0;
+  --text-mid: #777;
+  --text-muted: #555;
+  --text-dim: #444;
+  --text-dimmer: #333;
+  --text-label: #383838;
+  --text-faint: #2a2a2a;
+  color-scheme: dark;
+  --scrollbar-track: #111;
+  --scrollbar-thumb: #2a2a2a;
+}
+
+[data-theme="light"] {
+  --bg: #f4f4f5;
+  --bg-card: #ffffff;
+  --bg-input: #f0f0f0;
+  --bg-modal: #f8f8f8;
+  --bg-hover: #e4e4e5;
+  --bg-savings-good: #e8f8ef;
+  --bg-savings-bad: #fde8e8;
+  --bg-bar: #e0e0e0;
+  --border: #ddd;
+  --border-light: #e8e8e8;
+  --border-input: #ccc;
+  --border-hover: #bbb;
+  --text: #111;
+  --text-secondary: #444;
+  --text-body: #333;
+  --text-mid: #666;
+  --text-muted: #888;
+  --text-dim: #999;
+  --text-dimmer: #aaa;
+  --text-label: #bbb;
+  --text-faint: #ccc;
+  color-scheme: light;
+  --scrollbar-track: #f0f0f0;
+  --scrollbar-thumb: #ccc;
+}
+
 body {
-  background: #080808;
+  background: var(--bg);
 }
 
 @keyframes slideUp {
@@ -19,8 +75,8 @@ body {
 }
 
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #111; }
-::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 2px; }
 
 input[type=number] { -moz-appearance: textfield; }
 input::-webkit-inner-spin-button,

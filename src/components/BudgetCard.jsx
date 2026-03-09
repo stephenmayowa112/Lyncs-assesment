@@ -17,8 +17,8 @@ export default function BudgetCard({ cat, spent, budget, onBudgetChange }) {
 
   return (
     <div style={{
-      background: "#111",
-      border: "1px solid #1e1e1e",
+      background: "var(--bg-card)",
+      border: "1px solid var(--border)",
       borderLeft: `4px solid ${cat.color}`,
       borderRadius: 12,
       padding: "16px 18px",
@@ -28,7 +28,7 @@ export default function BudgetCard({ cat, spent, budget, onBudgetChange }) {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <span style={{ fontSize: 17 }}>{cat.icon}</span>
-          <span style={{ color: "#bbb", fontFamily: "'Archivo',sans-serif", fontWeight: 600, fontSize: 13 }}>{cat.label}</span>
+          <span style={{ color: "var(--text-secondary)", fontFamily: "'Archivo',sans-serif", fontWeight: 600, fontSize: 13 }}>{cat.label}</span>
           {over && (
             <span style={{
               background: "#FF505025", color: "#FF5050", fontSize: 9,
@@ -38,7 +38,7 @@ export default function BudgetCard({ cat, spent, budget, onBudgetChange }) {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 5, fontFamily: "'DM Mono',monospace", fontSize: 12 }}>
           <span style={{ color: over ? "#FF5050" : cat.color, fontWeight: 700 }}>{$c(spent)}</span>
-          <span style={{ color: "#333" }}>/</span>
+          <span style={{ color: "var(--text-dimmer)" }}>/</span>
           {editing ? (
             <input
               autoFocus
@@ -48,8 +48,8 @@ export default function BudgetCard({ cat, spent, budget, onBudgetChange }) {
               onBlur={commit}
               onKeyDown={(e) => e.key === "Enter" && commit()}
               style={{
-                width: 64, background: "#1e1e1e", border: `1px solid ${cat.color}`,
-                borderRadius: 4, color: "#fff", padding: "2px 5px",
+                width: 64, background: "var(--bg-bar)", border: `1px solid ${cat.color}`,
+                borderRadius: 4, color: "var(--text)", padding: "2px 5px",
                 fontFamily: "'DM Mono',monospace", fontSize: 12, outline: "none",
               }}
             />
@@ -57,14 +57,14 @@ export default function BudgetCard({ cat, spent, budget, onBudgetChange }) {
             <span
               onClick={() => { setVal(String(budget)); setEditing(true); }}
               title="Click to edit budget"
-              style={{ color: "#555", cursor: "pointer", textDecoration: "underline dotted", textUnderlineOffset: 3 }}
+              style={{ color: "var(--text-muted)", cursor: "pointer", textDecoration: "underline dotted", textUnderlineOffset: 3 }}
             >{$c(budget)}</span>
           )}
         </div>
       </div>
 
       {/* Bar */}
-      <div style={{ height: 5, background: "#1e1e1e", borderRadius: 99, overflow: "hidden" }}>
+      <div style={{ height: 5, background: "var(--bg-bar)", borderRadius: 99, overflow: "hidden" }}>
         <div style={{
           height: "100%", width: `${pct * 100}%`,
           background: over ? "#FF5050" : cat.color,
@@ -73,9 +73,9 @@ export default function BudgetCard({ cat, spent, budget, onBudgetChange }) {
         }} />
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 7, fontFamily: "'DM Mono',monospace", fontSize: 10, color: "#444" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 7, fontFamily: "'DM Mono',monospace", fontSize: 10, color: "var(--text-dim)" }}>
         <span>{Math.round(pct * 100)}% used</span>
-        <span style={{ color: over ? "#FF5050" : "#444" }}>
+        <span style={{ color: over ? "#FF5050" : "var(--text-dim)" }}>
           {over ? `${$c(Math.abs(remaining))} over` : `${$c(remaining)} remaining`}
         </span>
       </div>

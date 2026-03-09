@@ -7,7 +7,7 @@ export default function SavingsBanner({ savings, totalSpent, income }) {
   return (
     <div className="savings-banner" style={{
       margin: "20px 28px 0",
-      background: isOver ? "#1a0a0a" : "#0a1a11",
+      background: isOver ? "var(--bg-savings-bad)" : "var(--bg-savings-good)",
       border: `1px solid ${isOver ? "#FF5050" : "#00FFB2"}28`,
       borderRadius: 14, padding: "20px 24px",
       display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -15,7 +15,7 @@ export default function SavingsBanner({ savings, totalSpent, income }) {
       gap: 16,
     }}>
       <div>
-        <div style={{ color: "#555", fontSize: 9, fontFamily: "'DM Mono',monospace", letterSpacing: 2 }}>
+        <div style={{ color: "var(--text-muted)", fontSize: 9, fontFamily: "'DM Mono',monospace", letterSpacing: 2 }}>
           {isOver ? "OVERSPENT" : "NET SAVINGS"}
         </div>
         <div className="savings-amount" style={{ fontFamily: "'Archivo Black',sans-serif", fontSize: 38, color: isOver ? "#FF5050" : "#00FFB2", marginTop: 4, lineHeight: 1 }}>
@@ -23,7 +23,7 @@ export default function SavingsBanner({ savings, totalSpent, income }) {
         </div>
       </div>
       <div className="savings-right" style={{ textAlign: "right" }}>
-        <div style={{ color: "#444", fontSize: 12, fontFamily: "'DM Mono',monospace" }}>
+        <div style={{ color: "var(--text-dim)", fontSize: 12, fontFamily: "'DM Mono',monospace" }}>
           {$c(totalSpent)} spent of {$c(income)}
         </div>
         <div style={{

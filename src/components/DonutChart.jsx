@@ -21,8 +21,8 @@ export default function DonutChart({ catTotals, totalSpent }) {
   if (totalSpent === 0) {
     return (
       <svg viewBox="0 0 200 200" style={{ width: "100%", maxWidth: 200, display: "block", margin: "0 auto" }}>
-        <circle cx={cx} cy={cy} r={(R + r) / 2} fill="none" stroke="#1e1e1e" strokeWidth={R - r + 1} />
-        <text x={cx} y={cy + 4} textAnchor="middle" fill="#444" fontSize={10} fontFamily="'DM Mono',monospace">no data yet</text>
+        <circle cx={cx} cy={cy} r={(R + r) / 2} fill="none" style={{ stroke: "var(--border)" }} strokeWidth={R - r + 1} />
+        <text x={cx} y={cy + 4} textAnchor="middle" style={{ fill: "var(--text-dim)" }} fontSize={10} fontFamily="'DM Mono',monospace">no data yet</text>
       </svg>
     );
   }
@@ -39,14 +39,14 @@ export default function DonutChart({ catTotals, totalSpent }) {
 
   return (
     <svg viewBox="0 0 200 200" style={{ width: "100%", maxWidth: 200, display: "block", margin: "0 auto" }}>
-      <circle cx={cx} cy={cy} r={(R + r) / 2} fill="none" stroke="#1c1c1c" strokeWidth={R - r + 2} />
+      <circle cx={cx} cy={cy} r={(R + r) / 2} fill="none" style={{ stroke: "var(--border)" }} strokeWidth={R - r + 2} />
       {segments.map(({ cat, start, end }) => (
         <path key={cat.id} d={arc(cx, cy, R, r, start, end)} fill={cat.color} style={{ transition: "opacity 0.3s" }}>
           <title>{cat.label}: {$c(catTotals[cat.id])}</title>
         </path>
       ))}
-      <text x={cx} y={cy - 10} textAnchor="middle" fill="#555" fontSize={8} fontFamily="'DM Mono',monospace" letterSpacing="2">SPENT</text>
-      <text x={cx} y={cy + 13} textAnchor="middle" fill="#fff" fontSize={19} fontFamily="'Archivo Black',sans-serif">{$c(totalSpent)}</text>
+      <text x={cx} y={cy - 10} textAnchor="middle" style={{ fill: "var(--text-muted)" }} fontSize={8} fontFamily="'DM Mono',monospace" letterSpacing="2">SPENT</text>
+      <text x={cx} y={cy + 13} textAnchor="middle" style={{ fill: "var(--text)" }} fontSize={19} fontFamily="'Archivo Black',sans-serif">{$c(totalSpent)}</text>
     </svg>
   );
 }

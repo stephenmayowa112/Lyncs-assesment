@@ -27,20 +27,20 @@ export default function AddModal({ onAdd, onClose, defaultDate }) {
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div className="modal-body" style={{
-        background: "#0e0e0e", borderRadius: "22px 22px 0 0",
+        background: "var(--bg-modal)", borderRadius: "22px 22px 0 0",
         padding: "30px 26px 44px", width: "100%", maxWidth: 520,
-        border: "1px solid #222", borderBottom: "none",
+        border: "1px solid var(--border-hover)", borderBottom: "none",
         animation: "slideUp 0.28s cubic-bezier(.4,0,.2,1)",
       }}>
         {/* Header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 26 }}>
-          <h2 style={{ color: "#fff", fontFamily: "'Archivo Black',sans-serif", fontSize: 20, margin: 0 }}>Add Transaction</h2>
-          <button onClick={onClose} style={{ background: "none", border: "none", color: "#555", cursor: "pointer", fontSize: 24, lineHeight: 1 }}>×</button>
+          <h2 style={{ color: "var(--text)", fontFamily: "'Archivo Black',sans-serif", fontSize: 20, margin: 0 }}>Add Transaction</h2>
+          <button onClick={onClose} style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", fontSize: 24, lineHeight: 1 }}>×</button>
         </div>
 
         {/* Category */}
         <div style={{ marginBottom: 22 }}>
-          <label style={{ color: "#555", fontFamily: "'DM Mono',monospace", fontSize: 9, letterSpacing: 2, display: "block", marginBottom: 10 }}>CATEGORY</label>
+          <label style={{ color: "var(--text-muted)", fontFamily: "'DM Mono',monospace", fontSize: 9, letterSpacing: 2, display: "block", marginBottom: 10 }}>CATEGORY</label>
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
             {CATS.map((c) => (
               <button
@@ -50,9 +50,9 @@ export default function AddModal({ onAdd, onClose, defaultDate }) {
                   display: "flex", alignItems: "center", gap: 5,
                   padding: "8px 13px", borderRadius: 9, cursor: "pointer",
                   fontFamily: "'Archivo',sans-serif", fontWeight: 600, fontSize: 12,
-                  border: `1.5px solid ${form.category === c.id ? c.color : "#222"}`,
-                  background: form.category === c.id ? c.color + "1a" : "#161616",
-                  color: form.category === c.id ? c.color : "#555",
+                  border: `1.5px solid ${form.category === c.id ? c.color : "var(--border-hover)"}`,
+                  background: form.category === c.id ? c.color + "1a" : "var(--bg-input)",
+                  color: form.category === c.id ? c.color : "var(--text-muted)",
                   transition: "all 0.15s",
                 }}
               >
@@ -64,7 +64,7 @@ export default function AddModal({ onAdd, onClose, defaultDate }) {
 
         {/* Amount */}
         <div style={{ marginBottom: 16 }}>
-          <label style={{ color: "#555", fontFamily: "'DM Mono',monospace", fontSize: 9, letterSpacing: 2, display: "block", marginBottom: 8 }}>AMOUNT</label>
+          <label style={{ color: "var(--text-muted)", fontFamily: "'DM Mono',monospace", fontSize: 9, letterSpacing: 2, display: "block", marginBottom: 8 }}>AMOUNT</label>
           <div style={{ position: "relative" }}>
             <span className="modal-dollar" style={{
               position: "absolute", left: 15, top: "50%", transform: "translateY(-50%)",
@@ -79,9 +79,9 @@ export default function AddModal({ onAdd, onClose, defaultDate }) {
               className="modal-amount-input"
               style={{
                 width: "100%", boxSizing: "border-box",
-                background: "#161616", borderRadius: 11,
+                background: "var(--bg-input)", borderRadius: 11,
                 border: `1.5px solid ${cat?.color}33`,
-                color: "#fff", padding: "15px 15px 15px 40px",
+                color: "var(--text)", padding: "15px 15px 15px 40px",
                 fontFamily: "'Archivo Black',sans-serif", fontSize: 26,
                 outline: "none", transition: "border-color 0.2s",
               }}
@@ -93,7 +93,7 @@ export default function AddModal({ onAdd, onClose, defaultDate }) {
 
         {/* Description */}
         <div style={{ marginBottom: 16 }}>
-          <label style={{ color: "#555", fontFamily: "'DM Mono',monospace", fontSize: 9, letterSpacing: 2, display: "block", marginBottom: 8 }}>DESCRIPTION</label>
+          <label style={{ color: "var(--text-muted)", fontFamily: "'DM Mono',monospace", fontSize: 9, letterSpacing: 2, display: "block", marginBottom: 8 }}>DESCRIPTION</label>
           <input
             type="text" placeholder="What was this for?"
             value={form.description}
@@ -101,8 +101,8 @@ export default function AddModal({ onAdd, onClose, defaultDate }) {
             onKeyDown={(e) => e.key === "Enter" && submit()}
             style={{
               width: "100%", boxSizing: "border-box",
-              background: "#161616", border: "1.5px solid #242424",
-              borderRadius: 11, color: "#fff", padding: "13px 15px",
+              background: "var(--bg-input)", border: "1.5px solid var(--border-input)",
+              borderRadius: 11, color: "var(--text)", padding: "13px 15px",
               fontFamily: "'Archivo',sans-serif", fontSize: 15, outline: "none",
             }}
           />
@@ -110,16 +110,16 @@ export default function AddModal({ onAdd, onClose, defaultDate }) {
 
         {/* Date */}
         <div style={{ marginBottom: 26 }}>
-          <label style={{ color: "#555", fontFamily: "'DM Mono',monospace", fontSize: 9, letterSpacing: 2, display: "block", marginBottom: 8 }}>DATE</label>
+          <label style={{ color: "var(--text-muted)", fontFamily: "'DM Mono',monospace", fontSize: 9, letterSpacing: 2, display: "block", marginBottom: 8 }}>DATE</label>
           <input
             type="date" value={form.date}
             onChange={(e) => set("date", e.target.value)}
             style={{
               width: "100%", boxSizing: "border-box",
-              background: "#161616", border: "1.5px solid #242424",
-              borderRadius: 11, color: "#fff", padding: "13px 15px",
+              background: "var(--bg-input)", border: "1.5px solid var(--border-input)",
+              borderRadius: 11, color: "var(--text)", padding: "13px 15px",
               fontFamily: "'DM Mono',monospace", fontSize: 14,
-              outline: "none", colorScheme: "dark",
+              outline: "none",
             }}
           />
         </div>

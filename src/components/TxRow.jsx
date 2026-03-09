@@ -9,7 +9,7 @@ export default function TxRow({ tx, onDelete }) {
   return (
     <div style={{
       display: "flex", alignItems: "center", gap: 10,
-      padding: "10px 0", borderBottom: "1px solid #161616",
+      padding: "10px 0", borderBottom: "1px solid var(--border-light)",
     }}>
       <div style={{
         width: 34, height: 34, borderRadius: 9, flexShrink: 0,
@@ -20,12 +20,12 @@ export default function TxRow({ tx, onDelete }) {
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{
-          color: "#d0d0d0", fontSize: 13, fontFamily: "'Archivo',sans-serif", fontWeight: 500,
+          color: "var(--text-body)", fontSize: 13, fontFamily: "'Archivo',sans-serif", fontWeight: 500,
           whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
         }}>
           {tx.description || cat?.label}
         </div>
-        <div style={{ color: "#444", fontSize: 10, fontFamily: "'DM Mono',monospace", marginTop: 2 }}>
+        <div style={{ color: "var(--text-dim)", fontSize: 10, fontFamily: "'DM Mono',monospace", marginTop: 2 }}>
           {dateStr} ·{" "}
           <span style={{ color: (cat?.color ?? "#888") + "cc" }}>{cat?.label}</span>
         </div>
@@ -37,13 +37,13 @@ export default function TxRow({ tx, onDelete }) {
         onClick={() => onDelete(tx.id)}
         title="Delete"
         style={{
-          background: "none", border: "none", color: "#2a2a2a", cursor: "pointer",
+          background: "none", border: "none", color: "var(--text-faint)", cursor: "pointer",
           fontSize: 18, lineHeight: 1, padding: "3px 5px", borderRadius: 4,
           transition: "color 0.15s",
           flexShrink: 0,
         }}
         onMouseEnter={(e) => (e.currentTarget.style.color = "#FF5050")}
-        onMouseLeave={(e) => (e.currentTarget.style.color = "#2a2a2a")}
+        onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-faint)")}
       >
         ×
       </button>
