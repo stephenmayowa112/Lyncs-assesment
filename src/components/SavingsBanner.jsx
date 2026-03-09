@@ -1,6 +1,4 @@
-import { $c } from "../utils/format";
-
-export default function SavingsBanner({ savings, totalSpent, income }) {
+export default function SavingsBanner({ savings, totalSpent, income, fmt }) {
   const isOver = savings < 0;
   const savingsPct = income > 0 ? Math.round((savings / income) * 100) : 0;
 
@@ -19,12 +17,12 @@ export default function SavingsBanner({ savings, totalSpent, income }) {
           {isOver ? "OVERSPENT" : "NET SAVINGS"}
         </div>
         <div className="savings-amount" style={{ fontFamily: "'Archivo Black',sans-serif", fontSize: 38, color: isOver ? "#FF5050" : "#00FFB2", marginTop: 4, lineHeight: 1 }}>
-          {isOver ? "-" : ""}{$c(Math.abs(savings))}
+          {isOver ? "-" : ""}{fmt(Math.abs(savings))}
         </div>
       </div>
       <div className="savings-right" style={{ textAlign: "right" }}>
         <div style={{ color: "var(--text-dim)", fontSize: 12, fontFamily: "'DM Mono',monospace" }}>
-          {$c(totalSpent)} spent of {$c(income)}
+          {fmt(totalSpent)} spent of {fmt(income)}
         </div>
         <div style={{
           display: "inline-block", marginTop: 8,

@@ -10,3 +10,9 @@ export const MONTHS = [
   "January","February","March","April","May","June",
   "July","August","September","October","November","December",
 ];
+
+export const CURRENCIES = [
+  { id: "NGN", label: "Naira (₦)",   symbol: "₦", code: "NGN", locale: "en-NG" },
+  { id: "USD", label: "Dollar ($)",  symbol: "$", code: "USD", locale: "en-US" },
+  { id: "EUR", label: "Euro (€)",    symbol: "€", code: "EUR", locale: "de-DE" },
+];

@@ -1,5 +1,4 @@
 import { CATS } from "../constants";
-import { $c } from "../utils/format";
 
 function polar(cx, cy, r, deg) {
   const rad = ((deg - 90) * Math.PI) / 180;
@@ -15,7 +14,7 @@ function arc(cx, cy, R, r, a, b) {
   return `M${sx},${sy} A${R},${R} 0 ${lg},1 ${ex},${ey} L${ix},${iy} A${r},${r} 0 ${lg},0 ${jx},${jy}Z`;
 }
 
-export default function DonutChart({ catTotals, totalSpent }) {
+export default function DonutChart({ catTotals, totalSpent, fmt }) {
   const cx = 100, cy = 100, R = 84, r = 58;
 
   if (totalSpent === 0) {
@@ -42,11 +41,11 @@ export default function DonutChart({ catTotals, totalSpent }) {
       <circle cx={cx} cy={cy} r={(R + r) / 2} fill="none" style={{ stroke: "var(--border)" }} strokeWidth={R - r + 2} />
       {segments.map(({ cat, start, end }) => (
         <path key={cat.id} d={arc(cx, cy, R, r, start, end)} fill={cat.color} style={{ transition: "opacity 0.3s" }}>
-          <title>{cat.label}: {$c(catTotals[cat.id])}</title>
+          <title>{cat.label}: {fmt(catTotals[cat.id])}</title>
         </path>
       ))}
       <text x={cx} y={cy - 10} textAnchor="middle" style={{ fill: "var(--text-muted)" }} fontSize={8} fontFamily="'DM Mono',monospace" letterSpacing="2">SPENT</text>
-      <text x={cx} y={cy + 13} textAnchor="middle" style={{ fill: "var(--text)" }} fontSize={19} fontFamily="'Archivo Black',sans-serif">{$c(totalSpent)}</text>
+      <text x={cx} y={cy + 13} textAnchor="middle" style={{ fill: "var(--text)" }} fontSize={19} fontFamily="'Archivo Black',sans-serif">{fmt(totalSpent)}</text>
     </svg>
   );
 }

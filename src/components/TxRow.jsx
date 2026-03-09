@@ -1,7 +1,6 @@
 import { CATS } from "../constants";
-import { $c } from "../utils/format";
 
-export default function TxRow({ tx, onDelete }) {
+export default function TxRow({ tx, onDelete, fmt }) {
   const cat = CATS.find((c) => c.id === tx.category);
   const d = new Date(tx.date + "T00:00:00");
   const dateStr = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
@@ -31,7 +30,7 @@ export default function TxRow({ tx, onDelete }) {
         </div>
       </div>
       <div style={{ fontFamily: "'DM Mono',monospace", fontSize: 13, color: "#FF5050", fontWeight: 700, flexShrink: 0 }}>
-        −{$c(tx.amount, 2)}
+        −{fmt(tx.amount, 2)}
       </div>
       <button
         onClick={() => onDelete(tx.id)}

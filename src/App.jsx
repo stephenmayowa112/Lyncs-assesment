@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { CATS } from "./constants";
+import { CATS, CURRENCIES } from "./constants";
 import { $c, pad, now } from "./utils/format";
 import { load, persist } from "./utils/storage";
 import { getTotals } from "./utils/helpers";
@@ -19,13 +19,23 @@ export default function App() {
   const [editingIncome, setEditingIncome] = useState(false);
   const [incomeVal, setIncomeVal] = useState("");
   const [isDark, setIsDark] = useState(() => localStorage.getItem("finsnap_theme") !== "light");
+  const [currency, setCurrency] = useState(() => {
+    const saved = localStorage.getItem("finsnap_currency");
+    return CURRENCIES.find((c) => c.id === saved) || CURRENCIES[0];
+  });
 
   useEffect(() => {
     document.documentElement.dataset.theme = isDark ? "dark" : "light";
     localStorage.setItem("finsnap_theme", isDark ? "dark" : "light");
   }, [isDark]);
 
+  useEffect(() => {
+    localStorage.setItem("finsnap_currency", currency.id);
+  }, [currency]);
+
   const toggleTheme = () => setIsDark((d) => !d);
+
+  const fmt = (n, dec) => $c(n, dec, currency);
 
   useEffect(() => {
     setData(load(yr, mo));
@@ -78,9 +88,12 @@ export default function App() {
         navMonth={navMonth}
         isDark={isDark}
         toggleTheme={toggleTheme}
+        fmt={fmt}
+        currency={currency}
+        setCurrency={setCurrency}
       />
 
-      <SavingsBanner savings={savings} totalSpent={totalSpent} income={data.income} />
+      <SavingsBanner savings={savings} totalSpent={totalSpent} income={data.income} fmt={fmt} />
 
       {/* Main Grid */}
       <div className="main-grid" style={{
@@ -102,6 +115,7 @@ export default function App() {
               spent={catTotals[cat.id]}
               budget={data.budgets[cat.id]}
               onBudgetChange={setBudget}
+              fmt={fmt}
             />
           ))}
         </div>
@@ -111,7 +125,7 @@ export default function App() {
           {/* Donut chart card */}
           <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 14, padding: "20px 18px" }}>
             <div style={{ color: "var(--text-label)", fontSize: 9, fontFamily: "'DM Mono',monospace", letterSpacing: 3, marginBottom: 16 }}>SPENDING BREAKDOWN</div>
-            <DonutChart catTotals={catTotals} totalSpent={totalSpent} />
+            <DonutChart catTotals={catTotals} totalSpent={totalSpent} fmt={fmt} />
             {/* Legend */}
             <div style={{ marginTop: 18 }}>
               {CATS.map((cat) => {
@@ -125,7 +139,7 @@ export default function App() {
                     <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                       {pct > 0 && <span style={{ color: "var(--text-dimmer)", fontFamily: "'DM Mono',monospace", fontSize: 10 }}>{pct}%</span>}
                       <span style={{ color: catTotals[cat.id] > 0 ? "var(--text-secondary)" : "var(--text-faint)", fontFamily: "'DM Mono',monospace", fontSize: 11 }}>
-                        {catTotals[cat.id] > 0 ? $c(catTotals[cat.id]) : "—"}
+                        {catTotals[cat.id] > 0 ? fmt(catTotals[cat.id]) : "—"}
                       </span>
                     </div>
                   </div>
@@ -147,7 +161,7 @@ export default function App() {
                 <span style={{ fontSize: 22, display: "block", marginTop: 8 }}>💸</span>
               </div>
             ) : (
-              recentTxns.map((tx) => <TxRow key={tx.id} tx={tx} onDelete={delTx} />)
+              recentTxns.map((tx) => <TxRow key={tx.id} tx={tx} onDelete={delTx} fmt={fmt} />)
             )}
           </div>
         </div>
@@ -189,6 +203,7 @@ export default function App() {
           onAdd={addTx}
           onClose={() => setShowModal(false)}
           defaultDate={defaultDate}
+          currency={currency}
         />
       )}
     </div>

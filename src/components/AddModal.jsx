@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CATS } from "../constants";
 import { uid } from "../utils/format";
 
-export default function AddModal({ onAdd, onClose, defaultDate }) {
+export default function AddModal({ onAdd, onClose, defaultDate, currency }) {
   const [form, setForm] = useState({ category: CATS[0].id, amount: "", description: "", date: defaultDate });
   const [err, setErr] = useState("");
 
@@ -69,7 +69,7 @@ export default function AddModal({ onAdd, onClose, defaultDate }) {
             <span className="modal-dollar" style={{
               position: "absolute", left: 15, top: "50%", transform: "translateY(-50%)",
               color: cat?.color, fontFamily: "'Archivo Black',sans-serif", fontSize: 22,
-            }}>$</span>
+            }}>{currency.symbol}</span>
             <input
               autoFocus
               type="number" min="0" step="0.01" placeholder="0.00"

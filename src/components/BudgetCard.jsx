@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { $c } from "../utils/format";
 
-export default function BudgetCard({ cat, spent, budget, onBudgetChange }) {
+export default function BudgetCard({ cat, spent, budget, onBudgetChange, fmt }) {
   const [editing, setEditing] = useState(false);
   const [val, setVal] = useState(String(budget));
 
@@ -37,7 +36,7 @@ export default function BudgetCard({ cat, spent, budget, onBudgetChange }) {
           )}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 5, fontFamily: "'DM Mono',monospace", fontSize: 12 }}>
-          <span style={{ color: over ? "#FF5050" : cat.color, fontWeight: 700 }}>{$c(spent)}</span>
+          <span style={{ color: over ? "#FF5050" : cat.color, fontWeight: 700 }}>{fmt(spent)}</span>
           <span style={{ color: "var(--text-dimmer)" }}>/</span>
           {editing ? (
             <input
@@ -58,7 +57,7 @@ export default function BudgetCard({ cat, spent, budget, onBudgetChange }) {
               onClick={() => { setVal(String(budget)); setEditing(true); }}
               title="Click to edit budget"
               style={{ color: "var(--text-muted)", cursor: "pointer", textDecoration: "underline dotted", textUnderlineOffset: 3 }}
-            >{$c(budget)}</span>
+            >{fmt(budget)}</span>
           )}
         </div>
       </div>
@@ -76,7 +75,7 @@ export default function BudgetCard({ cat, spent, budget, onBudgetChange }) {
       <div style={{ display: "flex", justifyContent: "space-between", marginTop: 7, fontFamily: "'DM Mono',monospace", fontSize: 10, color: "var(--text-dim)" }}>
         <span>{Math.round(pct * 100)}% used</span>
         <span style={{ color: over ? "#FF5050" : "var(--text-dim)" }}>
-          {over ? `${$c(Math.abs(remaining))} over` : `${$c(remaining)} remaining`}
+          {over ? `${fmt(Math.abs(remaining))} over` : `${fmt(remaining)} remaining`}
         </span>
       </div>
     </div>

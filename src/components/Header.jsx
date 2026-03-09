@@ -1,7 +1,6 @@
-import { MONTHS } from "../constants";
-import { $c } from "../utils/format";
+import { MONTHS, CURRENCIES } from "../constants";
 
-export default function Header({ mo, yr, data, editingIncome, incomeVal, setIncomeVal, setEditingIncome, commitIncome, navMonth, isDark, toggleTheme }) {
+export default function Header({ mo, yr, data, editingIncome, incomeVal, setIncomeVal, setEditingIncome, commitIncome, navMonth, isDark, toggleTheme, fmt, currency, setCurrency }) {
   return (
     <header className="app-header" style={{
       display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -38,7 +37,7 @@ export default function Header({ mo, yr, data, editingIncome, incomeVal, setInco
         >›</button>
       </div>
 
-      {/* Theme toggle + Income */}
+      {/* Theme toggle + Currency + Income */}
       <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
         <button
           onClick={toggleTheme}
@@ -54,6 +53,23 @@ export default function Header({ mo, yr, data, editingIncome, incomeVal, setInco
         >
           {isDark ? "☀" : "🌙"}
         </button>
+
+        {/* Currency selector */}
+        <select
+          value={currency.id}
+          onChange={(e) => setCurrency(CURRENCIES.find((c) => c.id === e.target.value))}
+          style={{
+            background: "var(--bg-input)", border: "1px solid var(--border-hover)",
+            borderRadius: 8, color: "var(--text)", cursor: "pointer",
+            fontFamily: "'DM Mono',monospace", fontSize: 11,
+            padding: "6px 8px", outline: "none", transition: "background 0.15s",
+          }}
+        >
+          {CURRENCIES.map((c) => (
+            <option key={c.id} value={c.id}>{c.symbol} {c.code}</option>
+          ))}
+        </select>
+
         <div className="header-income" style={{ textAlign: "right" }}>
           <div style={{ color: "var(--text-dim)", fontSize: 9, fontFamily: "'DM Mono',monospace", letterSpacing: 2 }}>MONTHLY INCOME</div>
           {editingIncome ? (
@@ -78,7 +94,7 @@ export default function Header({ mo, yr, data, editingIncome, incomeVal, setInco
               className="header-income-value"
               style={{ fontFamily: "'Archivo Black',sans-serif", fontSize: 22, color: "#00FFB2", cursor: "pointer", marginTop: 2 }}
             >
-              {$c(data.income)}
+              {fmt(data.income)}
             </div>
           )}
         </div>

@@ -1,6 +1,6 @@
-export const $c = (n, dec = 0) =>
-  new Intl.NumberFormat("en-US", {
-    style: "currency", currency: "USD",
+export const $c = (n, dec = 0, cur) =>
+  new Intl.NumberFormat(cur?.locale ?? "en-NG", {
+    style: "currency", currency: cur?.code ?? "NGN",
     minimumFractionDigits: dec, maximumFractionDigits: dec,
   }).format(n);
 
