@@ -73,7 +73,7 @@ export default function App() {
       <SavingsBanner savings={savings} totalSpent={totalSpent} income={data.income} />
 
       {/* Main Grid */}
-      <div style={{
+      <div className="main-grid" style={{
         display: "grid",
         gridTemplateColumns: "minmax(0,1fr) 300px",
         gap: 20,
@@ -145,6 +145,7 @@ export default function App() {
 
       {/* FAB */}
       <button
+        className="fab-btn"
         onClick={() => setShowModal(true)}
         title="Add Transaction"
         style={{

@@ -26,7 +26,7 @@ export default function AddModal({ onAdd, onClose, defaultDate }) {
       }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div style={{
+      <div className="modal-body" style={{
         background: "#0e0e0e", borderRadius: "22px 22px 0 0",
         padding: "30px 26px 44px", width: "100%", maxWidth: 520,
         border: "1px solid #222", borderBottom: "none",
@@ -66,7 +66,7 @@ export default function AddModal({ onAdd, onClose, defaultDate }) {
         <div style={{ marginBottom: 16 }}>
           <label style={{ color: "#555", fontFamily: "'DM Mono',monospace", fontSize: 9, letterSpacing: 2, display: "block", marginBottom: 8 }}>AMOUNT</label>
           <div style={{ position: "relative" }}>
-            <span style={{
+            <span className="modal-dollar" style={{
               position: "absolute", left: 15, top: "50%", transform: "translateY(-50%)",
               color: cat?.color, fontFamily: "'Archivo Black',sans-serif", fontSize: 22,
             }}>$</span>
@@ -76,6 +76,7 @@ export default function AddModal({ onAdd, onClose, defaultDate }) {
               value={form.amount}
               onChange={(e) => set("amount", e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && submit()}
+              className="modal-amount-input"
               style={{
                 width: "100%", boxSizing: "border-box",
                 background: "#161616", borderRadius: 11,

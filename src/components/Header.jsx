@@ -3,15 +3,15 @@ import { $c } from "../utils/format";
 
 export default function Header({ mo, yr, data, editingIncome, incomeVal, setIncomeVal, setEditingIncome, commitIncome, navMonth }) {
   return (
-    <header style={{
+    <header className="app-header" style={{
       display: "flex", alignItems: "center", justifyContent: "space-between",
       padding: "18px 28px", borderBottom: "1px solid #161616",
       position: "sticky", top: 0, zIndex: 50, background: "#080808",
       gap: 16,
     }}>
       {/* Logo */}
-      <div>
-        <div style={{ fontFamily: "'Archivo Black',sans-serif", fontSize: 21, letterSpacing: 2 }}>
+      <div className="header-logo">
+        <div className="header-logo-text" style={{ fontFamily: "'Archivo Black',sans-serif", fontSize: 21, letterSpacing: 2 }}>
           <span style={{ color: "#FAFF00" }}>FIN</span>
           <span style={{ color: "#fff" }}>SNAP</span>
         </div>
@@ -19,7 +19,7 @@ export default function Header({ mo, yr, data, editingIncome, incomeVal, setInco
       </div>
 
       {/* Month nav */}
-      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+      <div className="header-nav" style={{ display: "flex", alignItems: "center", gap: 14 }}>
         <button
           onClick={() => navMonth(-1)}
           style={{ background: "#161616", border: "1px solid #222", color: "#fff", borderRadius: 8, width: 34, height: 34, cursor: "pointer", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.15s" }}
@@ -39,7 +39,7 @@ export default function Header({ mo, yr, data, editingIncome, incomeVal, setInco
       </div>
 
       {/* Income */}
-      <div style={{ textAlign: "right" }}>
+      <div className="header-income" style={{ textAlign: "right" }}>
         <div style={{ color: "#444", fontSize: 9, fontFamily: "'DM Mono',monospace", letterSpacing: 2 }}>MONTHLY INCOME</div>
         {editingIncome ? (
           <input
@@ -60,6 +60,7 @@ export default function Header({ mo, yr, data, editingIncome, incomeVal, setInco
           <div
             onClick={() => { setIncomeVal(String(data.income)); setEditingIncome(true); }}
             title="Click to edit income"
+            className="header-income-value"
             style={{ fontFamily: "'Archivo Black',sans-serif", fontSize: 22, color: "#00FFB2", cursor: "pointer", marginTop: 2 }}
           >
             {$c(data.income)}

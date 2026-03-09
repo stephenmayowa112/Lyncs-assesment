@@ -5,7 +5,7 @@ export default function SavingsBanner({ savings, totalSpent, income }) {
   const savingsPct = income > 0 ? Math.round((savings / income) * 100) : 0;
 
   return (
-    <div style={{
+    <div className="savings-banner" style={{
       margin: "20px 28px 0",
       background: isOver ? "#1a0a0a" : "#0a1a11",
       border: `1px solid ${isOver ? "#FF5050" : "#00FFB2"}28`,
@@ -18,11 +18,11 @@ export default function SavingsBanner({ savings, totalSpent, income }) {
         <div style={{ color: "#555", fontSize: 9, fontFamily: "'DM Mono',monospace", letterSpacing: 2 }}>
           {isOver ? "OVERSPENT" : "NET SAVINGS"}
         </div>
-        <div style={{ fontFamily: "'Archivo Black',sans-serif", fontSize: 38, color: isOver ? "#FF5050" : "#00FFB2", marginTop: 4, lineHeight: 1 }}>
+        <div className="savings-amount" style={{ fontFamily: "'Archivo Black',sans-serif", fontSize: 38, color: isOver ? "#FF5050" : "#00FFB2", marginTop: 4, lineHeight: 1 }}>
           {isOver ? "-" : ""}{$c(Math.abs(savings))}
         </div>
       </div>
-      <div style={{ textAlign: "right" }}>
+      <div className="savings-right" style={{ textAlign: "right" }}>
         <div style={{ color: "#444", fontSize: 12, fontFamily: "'DM Mono',monospace" }}>
           {$c(totalSpent)} spent of {$c(income)}
         </div>

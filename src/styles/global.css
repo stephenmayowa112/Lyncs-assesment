@@ -25,3 +25,85 @@ body {
 input[type=number] { -moz-appearance: textfield; }
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+/* ── Responsive ─────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .app-header {
+    flex-wrap: wrap !important;
+    padding: 14px 16px !important;
+    gap: 12px !important;
+  }
+  .header-logo {
+    order: 1;
+  }
+  .header-income {
+    order: 2;
+    text-align: right;
+  }
+  .header-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center !important;
+  }
+
+  .savings-banner {
+    margin: 14px 16px 0 !important;
+    padding: 16px 18px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  .savings-amount {
+    font-size: 28px !important;
+  }
+  .savings-right {
+    text-align: left !important;
+  }
+
+  .main-grid {
+    grid-template-columns: 1fr !important;
+    padding: 16px 16px 120px !important;
+    gap: 16px !important;
+  }
+
+  .modal-body {
+    padding: 24px 18px 36px !important;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-amount-input {
+    font-size: 20px !important;
+  }
+  .modal-dollar {
+    font-size: 18px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 12px 12px !important;
+  }
+  .header-logo-text {
+    font-size: 17px !important;
+  }
+  .header-income-value {
+    font-size: 18px !important;
+  }
+
+  .savings-amount {
+    font-size: 24px !important;
+  }
+
+  .main-grid {
+    padding: 12px 12px 120px !important;
+  }
+
+  .fab-btn {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 24px !important;
+    bottom: 20px !important;
+    right: 20px !important;
+  }
+}
