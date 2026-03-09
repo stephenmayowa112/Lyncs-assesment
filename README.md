@@ -10,24 +10,10 @@ A bold, dark-themed monthly finance tracker built with React.
 ## Quick Start
 
 ```bash
-# Create a new Vite project
-npm create vite@latest finsnap -- --template react
-cd finsnap
-
-# Replace src/App.jsx with the provided App.jsx
-# (no extra dependencies needed — zero external UI libs)
-
+git clone https://github.com/stephenmayowa112/Lyncs-assesment.git
+cd Lyncs-assesment
 npm install
 npm run dev
-```
-
-Add this to `index.html` `<head>` for the fonts (Vite won't hot-load the Google Fonts `@import` without it):
-
-```html
-<link
-  href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap"
-  rel="stylesheet"
-/>
 ```
 
 ---
